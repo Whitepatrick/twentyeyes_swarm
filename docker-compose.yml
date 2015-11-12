@@ -1,0 +1,25 @@
+# docker-compose up -d
+nginx:
+  image: nginx
+  net: host
+  container_name: nginx
+  expose: ["80"]
+  volumes:
+   - ./nginx/config:/usr/share/elasticsearch/data
+
+jenkins:
+  image: jenkins
+  net: host
+  container_name: jenkins
+  expose: ["8080", "50000"]
+  volumes:
+   - ./jenkins/data:/var/jenkins_home
+
+logstash:
+  image: logstash
+  net: host
+  expose: ["5043"]
+  volumes:
+   - ./logstash/config/:/config
+  container_name: logstash
+  command: logstash -f /config/logstash-nginx.conf

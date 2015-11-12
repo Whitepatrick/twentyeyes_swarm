@@ -1,0 +1,7 @@
+**/extras/
+elasticsearch/config/elasticsearch/
+elasticsearch/esdata/
+esdata/
+config/elasticsearch/a
+secrets/
+$PWD/

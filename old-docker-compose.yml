@@ -1,0 +1,28 @@
+# docker-compose up -d
+#elastic-sb:
+#  image: elastic-sb
+  net: host
+  volumes:
+   - ./$PWD/config:/usr/share/elasticsearch/data
+   - ./$PWD/esdata:/usr/share/elasticsearch/esdata
+
+logstash-fwdr-sb:
+  image: logstash-fwdr-sb
+  net: host
+  volumes:
+    - ./$PWD/config:/opt/conf
+
+logstash-sb:
+  image: logstash-sb
+  net: host
+  volumes:
+    - ./$PWD/config:/config
+
+  expose:
+    - 25826
+
+  command: logstash -f /config/logstash-collectd.conf
+
+kibana-sb:
+  image: kibana-sb
+  net: host
